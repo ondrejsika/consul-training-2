@@ -5,15 +5,15 @@ hosts:
     - ssh_target: root@c-fra-1.sikademo.com
       vars:
         i: 1
-        ip: 138.68.88.246
+        ip: 209.38.216.164
     - ssh_target: root@c-fra-2.sikademo.com
       vars:
         i: 2
-        ip: 64.226.105.90
+        ip: 209.38.216.187
     - ssh_target: root@c-fra-3.sikademo.com
       vars:
         i: 3
-        ip: 164.92.238.91
+        ip: 164.90.175.228
 plays:
   - name:  Setup systemd service c-fra-{1,2,3}
     hosts: [all]
@@ -56,6 +56,12 @@ plays:
         template:
           path: /etc/consul/consul.hcl
           template: |
+            telemetry = {
+              prometheus_retention_time = "480h"
+              disable_hostname = true
+            }
+            server = true
+            bind_addr = "{{ .Vars.ip }}"
             bootstrap_expect = 3
             ui_config = {
               enabled = true
@@ -63,17 +69,12 @@ plays:
             client_addr = "0.0.0.0"
             datacenter = "fra"
             data_dir = "/var/lib/consul"
-            domain = "consul"
             enable_script_checks = true
             dns_config = {
               enable_truncate = true
               only_passing = true
             }
-            leave_on_terminate = true
             rejoin_after_leave = true
-            server = true
-            # node_name = "c-{{ .Vars.i }}"
-            bind_addr = "{{ .Vars.ip }}"
             retry_join = [
               "c-fra-1.sikademo.com",
               "c-fra-2.sikademo.com",

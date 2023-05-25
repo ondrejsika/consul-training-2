@@ -1,13 +1,13 @@
 {
   "service": {
-    "ID": "foo-1",
-    "Name": "foo",
-    "Address": "127.0.0.1",
-    "Port": 19001,
-    "Tags": ["web", "prometheus"],
+    "ID": "panda-1",
+    "Name": "panda",
+    "Address": "panda.k8s.sl.zone",
+    "Port": 80,
+    "Tags": ["k8s", "v1.24"],
     "Check": {
-      "HTTP": "http://127.0.0.1:19001/health",
-      "Interval": "10s",
+      "HTTP": "http://panda.k8s.sl.zone",
+      "Interval": "1s",
       "Timeout": "1s"
     }
   }
