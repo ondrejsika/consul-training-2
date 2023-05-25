@@ -4,11 +4,11 @@ hosts:
   reg1:
     - ssh_target: root@reg1.sikademo.com
       vars:
-        ip: 64.226.79.56
+        ip: 209.38.250.100
   reg2:
     - ssh_target: root@reg2.sikademo.com
       vars:
-        ip: 165.227.137.134
+        ip: 46.101.147.225
 plays:
   - name:  Setup systemd service c-fra-{1,2,3}
     hosts: [reg1, reg2]
@@ -67,7 +67,11 @@ plays:
             datacenter = "reg1"
             data_dir = "/var/lib/consul"
             retry_join = []
-            retry_join_wan = [ "reg2.sikademo.com" ]
+            retry_join_wan = [
+              "reg2.sikademo.com",
+              "c-lon-1.sikademo.com",
+              "c-fra-1.sikademo.com",
+            ]
             services = [
               {
                 name = "foo"
@@ -96,7 +100,11 @@ plays:
             datacenter = "reg2"
             data_dir = "/var/lib/consul"
             retry_join = []
-            retry_join_wan = [ "reg1.sikademo.com" ]
+            retry_join_wan = [
+              "reg1.sikademo.com",
+              "c-lon-1.sikademo.com",
+              "c-fra-1.sikademo.com",
+            ]
             services = [
               {
                 name = "foo"
@@ -114,3 +122,4 @@ plays:
       - name: Restart consul
         command:
           cmd: systemctl restart consul
+          # cmd: consul reload

@@ -2,44 +2,16 @@ Kind = "exported-services"
 Name = "default"
 Services = [
   {
-    Name      = "www"
+    Name      = "counter"
     Consumers = [
-      {
-        Peer = "lon"
-      },
       {
         Peer = "fra"
       }
     ]
   },
-  {
-    Name      = "db"
+    {
+    Name      = "redis"
     Consumers = [
-      {
-        Peer = "lon"
-      },
-      {
-        Peer = "fra"
-      }
-    ]
-  },
-  {
-    Name      = "foo"
-    Consumers = [
-      {
-        Peer = "lon"
-      },
-      {
-        Peer = "fra"
-      }
-    ]
-  },
-  {
-    Name      = "bar"
-    Consumers = [
-      {
-        Peer = "lon"
-      },
       {
         Peer = "fra"
       }

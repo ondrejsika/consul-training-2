@@ -5,15 +5,15 @@ hosts:
     - ssh_target: root@c-lon-1.sikademo.com
       vars:
         i: 1
-        ip: 164.92.225.129
+        ip: 206.189.62.235
     - ssh_target: root@c-lon-2.sikademo.com
       vars:
         i: 2
-        ip: 64.227.124.155
+        ip: 165.232.115.48
     - ssh_target: root@c-lon-3.sikademo.com
       vars:
         i: 3
-        ip: 134.122.69.234
+        ip: 209.38.216.171
 plays:
   - name:  Setup systemd service c-lon-{1,2,3}
     hosts: [all]
@@ -60,18 +60,17 @@ plays:
               "client_addr": "0.0.0.0",
               "datacenter": "lon",
               "data_dir": "/var/lib/consul",
-              "domain": "consul",
-              "enable_script_checks": true,
-              "dns_config": {
-                "enable_truncate": true,
-                "only_passing": true
-              },
-              "leave_on_terminate": true,
               "rejoin_after_leave": true,
               "server": true,
-              "node_name": "c-{{ .Vars.i }}",
               "bind_addr": "{{ .Vars.ip }}",
-              "retry_join": ["164.92.225.129", "64.227.124.155", "134.122.69.234"]
+              "retry_join": ["206.189.62.235", "165.232.115.48", "209.38.216.171"]
+              "retry_join_wan": [
+                "c-fra-1.sikademo.com",
+                "c-fra-2.sikademo.com",
+                "c-fra-3.sikademo.com",
+                "reg1.sikademo.com",
+                "reg2.sikademo.com"
+              ]
             }
       - name: Restart consul
         command:

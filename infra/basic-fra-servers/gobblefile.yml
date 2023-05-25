@@ -80,6 +80,13 @@ plays:
               "c-fra-2.sikademo.com",
               "c-fra-3.sikademo.com",
             ]
+            retry_join_wan = [
+              "c-lon-1.sikademo.com",
+              "c-lon-2.sikademo.com",
+              "c-lon-3.sikademo.com",
+              "reg1.sikademo.com",
+              "reg2.sikademo.com",
+            ]
             services = [
               {
                 name = "node-exporter"
@@ -94,4 +101,5 @@ plays:
             ]
       - name: Restart consul
         command:
-          cmd: systemctl restart consul
+          # cmd: systemctl restart consul
+          cmd: consul reload

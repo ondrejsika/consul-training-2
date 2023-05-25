@@ -24,3 +24,30 @@ run-service-bar-2:
 
 run-service-bar-3:
 	TEXT="bar-3" PORT=39002 hello-world-server
+
+
+prepared-query-1:
+	curl http://127.0.0.1:8500/v1/query \
+			--request POST \
+			--data '{"Name": "svc-foo-v0-1","Service": {"Service": "svc-foo", "tags": ["v0.1"]}}'
+
+prepared-query-2:
+	curl http://127.0.0.1:8500/v1/query \
+			--request POST \
+			--data '{"Name": "svc-foo-v0-2","Service": {"Service": "svc-foo", "tags": ["v0.2"]}}'
+
+prepared-query-3:
+	curl http://127.0.0.1:8500/v1/query \
+			--request POST \
+			--data '{"Name": "svc-foo-prod","Service": {"Service": "svc-foo", "tags": ["v0.1"]}}'
+	curl http://127.0.0.1:8500/v1/query \
+			--request POST \
+			--data '{"Name": "svc-foo-exp","Service": {"Service": "svc-foo", "tags": ["v0.2"]}}'
+
+prepared-query-4:
+	curl http://127.0.0.1:8500/v1/query \
+			--request PUT \
+			--data '{"Name": "svc-foo-prod","Service": {"Service": "svc-foo", "tags": ["v0.2"]}}'
+	curl http://127.0.0.1:8500/v1/query \
+			--request PUT \
+			--data '{"Name": "svc-foo-exp","Service": {"Service": "svc-foo", "tags": ["v0.3"]}}'

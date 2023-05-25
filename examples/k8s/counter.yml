@@ -87,3 +87,14 @@ spec:
     app: counter
   ports:
     - port: 80
+---
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ServiceIntentions
+metadata:
+  name: counter-to-redis
+spec:
+  destination:
+    name: redis
+  sources:
+    - name: counter
+      action: allow

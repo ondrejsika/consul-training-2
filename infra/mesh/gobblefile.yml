@@ -4,11 +4,11 @@ hosts:
   mesh1:
     - ssh_target: root@mesh1.sikademo.com
       vars:
-        ip: 161.35.16.251
+        ip: 134.209.227.216
   mesh2:
     - ssh_target: root@mesh2.sikademo.com
       vars:
-        ip: 165.22.70.148
+        ip: 134.122.71.64
 plays:
   - name:  Setup systemd service c-fra-{1,2,3}
     hosts: [mesh1, mesh2]
@@ -87,8 +87,7 @@ plays:
                   timeout = "1s"
                 }
                 connect = {
-                  sidecar_service = {
-                  }
+                  sidecar_service = {}
                 }
               }
             ]

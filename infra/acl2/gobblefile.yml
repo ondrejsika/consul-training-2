@@ -4,18 +4,18 @@ hosts:
   acl1:
     - ssh_target: root@acl21.sikademo.com
       vars:
-        ip: 142.93.174.17
-        token: 573c2cef-952a-e7f1-8ef3-08ea9b05f36b
+        ip: 209.38.250.77
+        token: 1c752465-459a-7549-88bd-6b8662d4ac54
   acl2:
     - ssh_target: root@acl22.sikademo.com
       vars:
-        ip: 142.93.170.245
-        token: 185990ef-0749-8a61-154c-4943c844de44
+        ip: 209.38.230.36
+        token: 61c3844d-8ad0-4cbe-adc1-d6d920a5bee5
   acl3:
     - ssh_target: root@acl23.sikademo.com
       vars:
-        ip: 142.93.105.157
-        token: b71d5d16-2459-642c-1a3f-ef683fefd8e8
+        ip: 159.65.115.169
+        token: 65762879-8852-6ebb-17a6-65b66c32545a
 global:
   vars:
     acl: "true"
@@ -142,7 +142,8 @@ plays:
         command:
           cmd: docker run --name www -d -p 80:80 ondrejsika/training-example:red || true
   - name: Restart consul
-    hosts: [acl1, acl2, acl3]
+    # hosts: [acl1, acl2, acl3]
+    hosts: [acl1]
     tags: [consul]
     tasks:
       - name: Restart consul
